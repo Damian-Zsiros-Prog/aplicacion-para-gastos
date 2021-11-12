@@ -12,9 +12,19 @@
         <form id="transactionForm">
             <div class="formField">
                 Tipo de transaccion
-                <input id="ingreso" type="radio" name="typeSelector" />
+                <input
+                    id="ingreso"
+                    type="radio"
+                    name="typeSelector"
+                    value="ing"
+                />
                 <label for="ingreso">Ingreso</label>
-                <input id="egreso" type="radio" name="typeSelector" />
+                <input
+                    id="egreso"
+                    type="radio"
+                    name="typeSelector"
+                    value="egr"
+                />
                 <label for="egreso">Egreso</label>
             </div>
 
@@ -106,6 +116,7 @@
 
             form.addEventListener("submit", function (e) {
                 e.preventDefault()
+                let transactionFormData = new FormData(form)
             })
         </script>
     </body>
