@@ -11,25 +11,38 @@
 
         <form>
             <div class="formField">
-                <input id="ingreso" type="radio" />
+                Tipo de transaccion
+                <input id="ingreso" type="radio" name="typeSelector" />
                 <label for="ingreso">Ingreso</label>
-                <input id="egreso" type="radio" />
+                <input id="egreso" type="radio" name="typeSelector" />
                 <label for="egreso">Egreso</label>
             </div>
 
             <div class="formField">
                 <label for="descripcionTransaction">Descripcion</label>
-                <input type="text" id="descripcionTransaction" />
+                <input
+                    type="text"
+                    id="descripcionTransaction"
+                    name="descripcionTransaction"
+                />
             </div>
 
             <div class="formField">
                 <label for="montoTransaction">Monto</label>
-                <input type="number" id="montoTransaction" />
+                <input
+                    type="number"
+                    id="montoTransaction"
+                    name="montoTransaction"
+                />
             </div>
 
             <div class="formField">
                 <label for="categoryTransaction">Categoria</label>
-                <input type="text" id="categoryTransaction" />
+                <input
+                    type="text"
+                    id="categoryTransaction"
+                    name="categoryTransaction"
+                />
             </div>
 
             <div class="formField">
