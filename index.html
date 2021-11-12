@@ -113,10 +113,10 @@
                     monto: transactionFormData.get("montoTransaction"),
                     categoria: transactionFormData.get("categoryTransaction"),
                 }
-                insertNewRowAtTable(transactionInfo)
+                insertNewTransactionAtTable(transactionInfo)
             })
 
-            function insertNewRowAtTable(transactionInfo) {
+            function insertNewTransactionAtTable(transactionInfo) {
                 let transactionTableRef =
                     document.getElementById("transactionTable")
                 let newTransactionRowRef = transactionTableRef.insertRow(1)
