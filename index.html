@@ -16,14 +16,14 @@
                     id="ingreso"
                     type="radio"
                     name="typeSelector"
-                    value="ing"
+                    value="Ingreso"
                 />
                 <label for="ingreso">Ingreso</label>
                 <input
                     id="egreso"
                     type="radio"
                     name="typeSelector"
-                    value="egr"
+                    value="Egreso"
                 />
                 <label for="egreso">Egreso</label>
             </div>
@@ -56,12 +56,12 @@
             </div>
 
             <div class="formField">
-                <button id="botonDeEnvio">Añadir</button>
+                <button type="submit" id="botonDeEnvio">Añadir</button>
             </div>
         </form>
 
         <div class="tableFormat">
-            <table>
+            <table id="transactionTable">
                 <!-- Columnas de la tabla -->
                 <tr>
                     <th>Tipo</th>
@@ -70,18 +70,6 @@
                     <th>Categoria</th>
                 </tr>
                 <!-- Filas de la tabla -->
-                <tr>
-                    <td>Ingreso</td>
-                    <td>Sueldo</td>
-                    <td>1000</td>
-                    <td>Trabajo</td>
-                </tr>
-                <tr>
-                    <td>Egreso</td>
-                    <td>Hamburguesa bigmac</td>
-                    <td>7</td>
-                    <td>Comida</td>
-                </tr>
             </table>
         </div>
 
@@ -117,7 +105,31 @@
             form.addEventListener("submit", function (e) {
                 e.preventDefault()
                 let transactionFormData = new FormData(form)
+                let transactionInfo = {
+                    tipo: transactionFormData.get("typeSelector"),
+                    descripcion: transactionFormData.get(
+                        "descripcionTransaction"
+                    ),
+                    monto: transactionFormData.get("montoTransaction"),
+                    categoria: transactionFormData.get("categoryTransaction"),
+                }
+                insertNewRowAtTable(transactionInfo)
             })
+
+            function insertNewRowAtTable(transactionInfo) {
+                let transactionTableRef =
+                    document.getElementById("transactionTable")
+                let newTransactionRowRef = transactionTableRef.insertRow(1)
+
+                let typeCellRef = newTransactionRowRef.insertCell(0)
+                typeCellRef.textContent = transactionInfo.tipo
+                let descripcionCellRef = newTransactionRowRef.insertCell(1)
+                descripcionCellRef.textContent = transactionInfo.descripcion
+                let montoCellRef = newTransactionRowRef.insertCell(2)
+                montoCellRef.textContent = transactionInfo.monto
+                let categoryCellRef = newTransactionRowRef.insertCell(3)
+                categoryCellRef.textContent = transactionInfo.categoria
+            }
         </script>
     </body>
 </html>
