@@ -10,26 +10,30 @@
         <h1>Mi aplicacion para gastos</h1>
 
         <form>
-            <div>
+            <div class="claseFormulario">
                 <input id="ingreso" type="radio" />
                 <label for="ingreso">Ingreso</label>
                 <input id="egreso" type="radio" />
                 <label for="egreso">Egreso</label>
             </div>
 
-            <div>
+            <div class="claseFormulario">
                 <label for="descripcionTransaction">Descripcion</label>
                 <input type="text" id="descripcionTransaction" />
             </div>
 
-            <div>
+            <div class="claseFormulario">
                 <label for="montoTransaction">Monto</label>
                 <input type="number" id="montoTransaction" />
             </div>
 
-            <div>
+            <div class="claseFormulario">
                 <label for="categoryTransaction">Categoria</label>
                 <input type="text" id="categoryTransaction" />
+            </div>
+
+            <div class="claseFormulario">
+                <button id="botonDeEnvio">Añadir</button>
             </div>
 
             <style>
@@ -39,9 +43,14 @@
                 form {
                     text-align: center;
                 }
+                .claseFormulario {
+                    background-color: wheat;
+                    padding: 20px;
+                }
+                #botonDeEnvio {
+                    font-size: 23px;
+                }
             </style>
-
-            <button>Añadir</button>
         </form>
     </body>
 </html>
