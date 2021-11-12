@@ -9,7 +9,7 @@
     <body>
         <h1>Mi aplicacion para gastos</h1>
 
-        <form>
+        <form id="transactionForm">
             <div class="formField">
                 Tipo de transaccion
                 <input id="ingreso" type="radio" name="typeSelector" />
@@ -100,5 +100,13 @@
                 font-size: 23px;
             }
         </style>
+
+        <script>
+            const form = document.getElementById("transactionForm")
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault()
+            })
+        </script>
     </body>
 </html>
