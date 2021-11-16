@@ -1,0 +1,22 @@
+td,
+th {
+    text-align: center;
+    padding: 10px;
+    border: solid red 1px;
+}
+.tableFormat table {
+    margin: 0 auto;
+}
+h1 {
+    text-align: center;
+}
+form {
+    text-align: center;
+}
+.formField {
+    background-color: wheat;
+    padding: 20px;
+}
+#botonDeEnvio {
+    font-size: 23px;
+}
