@@ -105,7 +105,14 @@
             form.addEventListener("submit", function (e) {
                 e.preventDefault()
                 let transactionFormData = new FormData(form)
-                let transactionInfo = {
+                let transactionDataObject =
+                    convertFormDataToTransactionObject(transactionFormData)
+                insertNewTransactionAtTable(transactionDataObject)
+                saveTransactionDataObject(transactionDataObject)
+            })
+
+            function convertFormDataToTransactionObject(transactionFormData) {
+                return {
                     tipo: transactionFormData.get("typeSelector"),
                     descripcion: transactionFormData.get(
                         "descripcionTransaction"
@@ -113,22 +120,34 @@
                     monto: transactionFormData.get("montoTransaction"),
                     categoria: transactionFormData.get("categoryTransaction"),
                 }
-                insertNewTransactionAtTable(transactionInfo)
-            })
+            }
 
-            function insertNewTransactionAtTable(transactionInfo) {
+            function insertNewTransactionAtTable(transactionDataObject) {
                 let transactionTableRef =
                     document.getElementById("transactionTable")
                 let newTransactionRowRef = transactionTableRef.insertRow(1)
 
                 let typeCellRef = newTransactionRowRef.insertCell(0)
-                typeCellRef.textContent = transactionInfo.tipo
+                typeCellRef.textContent = transactionDataObject.tipo
                 let descripcionCellRef = newTransactionRowRef.insertCell(1)
-                descripcionCellRef.textContent = transactionInfo.descripcion
+                descripcionCellRef.textContent =
+                    transactionDataObject.descripcion
                 let montoCellRef = newTransactionRowRef.insertCell(2)
-                montoCellRef.textContent = transactionInfo.monto
+                montoCellRef.textContent = transactionDataObject.monto
                 let categoryCellRef = newTransactionRowRef.insertCell(3)
-                categoryCellRef.textContent = transactionInfo.categoria
+                categoryCellRef.textContent = transactionDataObject.categoria
+            }
+
+            function saveTransactionDataObject(transactionDataObject) {
+                let transactionsHistory =
+                    JSON.parse(localStorage.getItem("transactionsHistory")) ||
+                    []
+                transactionsHistory.push(transactionDataObject)
+                let transactionDataNew = JSON.stringify(transactionsHistory)
+                return localStorage.setItem(
+                    "transactionsHistory",
+                    transactionDataNew
+                )
             }
         </script>
     </body>
