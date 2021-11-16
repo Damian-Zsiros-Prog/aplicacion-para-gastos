@@ -2,7 +2,6 @@ td,
 th {
     text-align: center;
     padding: 10px;
-    border: solid red 1px;
 }
 .tableFormat table {
     margin: 0 auto;

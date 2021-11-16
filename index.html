@@ -3,83 +3,122 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./resources/css/style.css" />
+        <!-- Compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
+        <!-- Icons Materialize CSS -->
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mi aplicacion para gastos</title>
     </head>
     <body>
-        <h1>Mi aplicacion para gastos</h1>
+        <main class="row">
+            <h1>Mi aplicacion para gastos</h1>
+            <section class="col l6 s12">
+                <div class="tableFormat">
+                    <table class="highlight striped" id="transactionTable">
+                        <!-- Columnas de la tabla -->
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Descipcion</th>
+                            <th>Monto</th>
+                            <th>Categoria</th>
+                            <th>Accion</th>
+                        </tr>
+                        <!-- Filas de la tabla -->
+                    </table>
+                </div>
+            </section>
+            <section class="col l6 s12">
+                <form id="transactionForm">
+                    <div class="row m5">
+                        <div class="input-field">
+                            <p>
+                                <span>Transaccion</span>
+                                <label>
+                                    <input
+                                        id="ingreso"
+                                        type="radio"
+                                        name="typeSelector"
+                                        value="Ingreso"
+                                        required
+                                    />
+                                    <span>Ingreso</span>
+                                </label>
+                                <label>
+                                    <input
+                                        id="egreso"
+                                        type="radio"
+                                        name="typeSelector"
+                                        value="Egreso"
+                                        required
+                                    />
+                                    <span>Egreso</span>
+                                </label>
+                            </p>
+                        </div>
 
-        <form id="transactionForm">
-            <div class="formField">
-                <p>
-                    <span>Transaccion</span>
-                    <input
-                        id="ingreso"
-                        type="radio"
-                        name="typeSelector"
-                        value="Ingreso"
-                        required
-                    />
-                    <label for="ingreso">Ingreso</label>
-                    <input
-                        id="egreso"
-                        type="radio"
-                        name="typeSelector"
-                        value="Egreso"
-                        required
-                    />
-                    <label for="egreso">Egreso</label>
-                </p>
-            </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">description</i>
+                            <input
+                                type="text"
+                                id="descripcionTransaction"
+                                name="descripcionTransaction"
+                                required
+                            />
+                            <label for="descripcionTransaction"
+                                >Descripcion</label
+                            >
+                        </div>
 
-            <div class="formField">
-                <label for="descripcionTransaction">Descripcion</label>
-                <input
-                    type="text"
-                    id="descripcionTransaction"
-                    name="descripcionTransaction"
-                    required
-                />
-            </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">attach_money</i>
+                            <input
+                                min="0"
+                                type="number"
+                                id="montoTransaction"
+                                name="montoTransaction"
+                                required
+                            />
+                            <label for="montoTransaction">Monto</label>
+                        </div>
+                        <div class="input-field">
+                            <i class="prefix"></i>
+                            <select
+                                name="categoryTransaction"
+                                id="categoryTransaction"
+                            ></select>
+                        </div>
 
-            <div class="formField">
-                <label for="montoTransaction">Monto</label>
-                <input
-                    min="0"
-                    type="number"
-                    id="montoTransaction"
-                    name="montoTransaction"
-                    required
-                />
-            </div>
-
-            <div class="formField">
-                <label for="categoryTransaction">Categoria</label>
-                <select
-                    name="categoryTransaction"
-                    id="categoryTransaction"
-                ></select>
-            </div>
-
-            <div class="formField">
-                <button type="submit" id="botonDeEnvio">Añadir</button>
-            </div>
-        </form>
-
-        <div class="tableFormat">
-            <table id="transactionTable">
-                <!-- Columnas de la tabla -->
-                <tr>
-                    <th>Tipo</th>
-                    <th>Descipcion</th>
-                    <th>Monto</th>
-                    <th>Categoria</th>
-                    <th>Eliminar</th>
-                </tr>
-                <!-- Filas de la tabla -->
-            </table>
-        </div>
+                        <div class="input-field">
+                            <button
+                                type="submit"
+                                class="waves-effect waves-light btn"
+                                id="botonDeEnvio"
+                            >
+                                Añadir
+                                <i class="material-icons right"
+                                    >add_to_photos</i
+                                >
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </main>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"
+        ></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
         <script src="./resources/js/app.js"></script>
     </body>
