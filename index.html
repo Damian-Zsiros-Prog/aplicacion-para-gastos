@@ -67,18 +67,15 @@
 
         <div class="tableFormat">
             <table id="transactionTable">
-                <thead>
-                    <!-- Columnas de la tabla -->
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Descipcion</th>
-                        <th>Monto</th>
-                        <th>Categoria</th>
-                    </tr>
-                </thead>
-                <tbody id="rowsTableTransactions">
-                    <!-- Filas de la tabla -->
-                </tbody>
+                <!-- Columnas de la tabla -->
+                <tr>
+                    <th>Tipo</th>
+                    <th>Descipcion</th>
+                    <th>Monto</th>
+                    <th>Categoria</th>
+                    <th>Eliminar</th>
+                </tr>
+                <!-- Filas de la tabla -->
             </table>
         </div>
 
@@ -133,12 +130,44 @@
             })
 
             /**
+             * @param {Number} transactionId
+             */
+            function deleteTransaction(transactionId) {
+                let transactionsHistory = Array(
+                    JSON.parse(localStorage.getItem("transactionsHistory"))
+                )
+
+                let transactionIndexInArray = Number(
+                    transactionsHistory.findIndex(
+                        (element) => element.transactionId !== transactionId
+                    )
+                )
+
+                transactionsHistory.splice(transactionIndexInArray)
+
+                let transactionsHistoryJSON =
+                    JSON.stringify(transactionsHistory)
+                localStorage.setItem(
+                    "transactionsHistory",
+                    transactionsHistoryJSON
+                )
+            }
+
+            /**
              * @param {Array} transactionsHistoryObject
              */
             function listTransactionsInTale(transactionsHistoryObject) {
-                return transactionsHistoryObject.forEach((transaction, i) =>
-                    insertNewTransactionAtTable(transaction, i)
+                return transactionsHistoryObject.forEach((transaction) =>
+                    insertNewTransactionAtTable(transaction)
                 )
+            }
+
+            function getTransactionId() {
+                let lastTransactionId =
+                    localStorage.getItem("lastTransactionId") || "-1"
+                let newTransactionId = parseInt(lastTransactionId) + 1
+                localStorage.setItem("lastTransactionId", newTransactionId)
+                return newTransactionId
             }
 
             /**
@@ -152,16 +181,21 @@
                     ),
                     monto: transactionFormData.get("montoTransaction"),
                     categoria: transactionFormData.get("categoryTransaction"),
+                    id: getTransactionId(),
                 }
             }
 
             /**
              * @param {Object} transactionDataObject
              */
-            function insertNewTransactionAtTable(transactionDataObject, i = 1) {
+            function insertNewTransactionAtTable(transactionDataObject) {
                 let transactionTableRef =
                     document.getElementById("transactionTable")
-                let newTransactionRowRef = transactionTableRef.insertRow(1)
+                let newTransactionRowRef = transactionTableRef.insertRow(-1)
+                newTransactionRowRef.setAttribute(
+                    "transactionId",
+                    transactionDataObject.id
+                )
 
                 let typeCellRef = newTransactionRowRef.insertCell(0)
                 typeCellRef.textContent = transactionDataObject.tipo
@@ -172,6 +206,19 @@
                 montoCellRef.textContent = transactionDataObject.monto
                 let categoryCellRef = newTransactionRowRef.insertCell(3)
                 categoryCellRef.textContent = transactionDataObject.categoria
+                let actionsCellRef = newTransactionRowRef.insertCell(4)
+
+                let deleteButton = document.createElement("button")
+                deleteButton.textContent = "Eliminar"
+                actionsCellRef.appendChild(deleteButton)
+
+                deleteButton.addEventListener("click", function (e) {
+                    let transactionAtDelete = e.target.parentNode.parentNode
+                    transactionAtDelete.remove()
+                    deleteTransaction(
+                        transactionAtDelete.getAttribute("transactionId")
+                    )
+                })
             }
 
             /**
