@@ -12,23 +12,25 @@
 
         <form id="transactionForm">
             <div class="formField">
-                Tipo de transaccion
-                <input
-                    id="ingreso"
-                    type="radio"
-                    name="typeSelector"
-                    value="Ingreso"
-                    required
-                />
-                <label for="ingreso">Ingreso</label>
-                <input
-                    id="egreso"
-                    type="radio"
-                    name="typeSelector"
-                    value="Egreso"
-                    required
-                />
-                <label for="egreso">Egreso</label>
+                <p>
+                    <span>Transaccion</span>
+                    <input
+                        id="ingreso"
+                        type="radio"
+                        name="typeSelector"
+                        value="Ingreso"
+                        required
+                    />
+                    <label for="ingreso">Ingreso</label>
+                    <input
+                        id="egreso"
+                        type="radio"
+                        name="typeSelector"
+                        value="Egreso"
+                        required
+                    />
+                    <label for="egreso">Egreso</label>
+                </p>
             </div>
 
             <div class="formField">
@@ -54,11 +56,10 @@
 
             <div class="formField">
                 <label for="categoryTransaction">Categoria</label>
-                <select name="categoryTransaction" id="categoryTransaction">
-                    <option value="Alquiler">Alquiler</option>
-                    <option value="Comida">Comida</option>
-                    <option value="Diversion">Diversion</option>
-                </select>
+                <select
+                    name="categoryTransaction"
+                    id="categoryTransaction"
+                ></select>
             </div>
 
             <div class="formField">
