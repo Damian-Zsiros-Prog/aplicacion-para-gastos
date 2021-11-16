@@ -17,6 +17,7 @@
                     type="radio"
                     name="typeSelector"
                     value="Ingreso"
+                    required
                 />
                 <label for="ingreso">Ingreso</label>
                 <input
@@ -24,6 +25,7 @@
                     type="radio"
                     name="typeSelector"
                     value="Egreso"
+                    required
                 />
                 <label for="egreso">Egreso</label>
             </div>
@@ -34,6 +36,7 @@
                     type="text"
                     id="descripcionTransaction"
                     name="descripcionTransaction"
+                    required
                 />
             </div>
 
@@ -43,6 +46,7 @@
                     type="number"
                     id="montoTransaction"
                     name="montoTransaction"
+                    required
                 />
             </div>
 
@@ -52,6 +56,7 @@
                     type="text"
                     id="categoryTransaction"
                     name="categoryTransaction"
+                    required
                 />
             </div>
 
@@ -62,14 +67,18 @@
 
         <div class="tableFormat">
             <table id="transactionTable">
-                <!-- Columnas de la tabla -->
-                <tr>
-                    <th>Tipo</th>
-                    <th>Descipcion</th>
-                    <th>Monto</th>
-                    <th>Categoria</th>
-                </tr>
-                <!-- Filas de la tabla -->
+                <thead>
+                    <!-- Columnas de la tabla -->
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descipcion</th>
+                        <th>Monto</th>
+                        <th>Categoria</th>
+                    </tr>
+                </thead>
+                <tbody id="rowsTableTransactions">
+                    <!-- Filas de la tabla -->
+                </tbody>
             </table>
         </div>
 
@@ -102,6 +111,17 @@
         <script>
             const form = document.getElementById("transactionForm")
 
+            window.addEventListener("DOMContentLoaded", function () {
+                let transactionsHistoryObject =
+                    JSON.parse(localStorage.getItem("transactionsHistory")) ||
+                    []
+                console.log(transactionsHistoryObject)
+                listTransactionsInTale(transactionsHistoryObject)
+            })
+
+            /**
+             * @param {Event} e
+             */
             form.addEventListener("submit", function (e) {
                 e.preventDefault()
                 let transactionFormData = new FormData(form)
@@ -111,6 +131,18 @@
                 saveTransactionDataObject(transactionDataObject)
             })
 
+            /**
+             * @param {Array} transactionsHistoryObject
+             */
+            function listTransactionsInTale(transactionsHistoryObject) {
+                return transactionsHistoryObject.forEach((transaction, i) =>
+                    insertNewTransactionAtTable(transaction, i)
+                )
+            }
+
+            /**
+             * @param {FormData} transactionFormData
+             */
             function convertFormDataToTransactionObject(transactionFormData) {
                 return {
                     tipo: transactionFormData.get("typeSelector"),
@@ -122,7 +154,10 @@
                 }
             }
 
-            function insertNewTransactionAtTable(transactionDataObject) {
+            /**
+             * @param {Object} transactionDataObject
+             */
+            function insertNewTransactionAtTable(transactionDataObject, i = 1) {
                 let transactionTableRef =
                     document.getElementById("transactionTable")
                 let newTransactionRowRef = transactionTableRef.insertRow(1)
@@ -138,6 +173,9 @@
                 categoryCellRef.textContent = transactionDataObject.categoria
             }
 
+            /**
+             * @param {Object} transactionDataObject
+             */
             function saveTransactionDataObject(transactionDataObject) {
                 let transactionsHistory =
                     JSON.parse(localStorage.getItem("transactionsHistory")) ||
